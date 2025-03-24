@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xem chi tiết</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="/public/assets/themes/slick.css">
+    <link rel="stylesheet" type="text/css" href="/public/assets/themes/main.css">
+    <link rel="stylesheet" href="/public/assets/themes/select2.min.css">
+
+    <!-- wow js -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <!-- Slick slider -->
+
+    <link rel="stylesheet" href="/pubic/assets/css/main.css">
+</head>
+
+<body>
+    <!-- Header Start -->
+    <app-header></app-header>
+    <hr class="mt-0">
+    <h2 class="text-center my-3" style="color: #2d4271;">Thông tin chi tiết tour du lịch</h2>
+    <!-- Header End -->
+    <main cl="main">
+        <div class="tour-detail" id="detailPage">
+            <div class="entry-head">
+                <section class="section-01">
+                    <div class="container">
+                        <div class="row">
+
+
+
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- <section class="section-02">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-12 col-sm-12 left" style="max-height: 464px;">
+                                <div class="image">
+                                    <img src="assets/image/tour-4-dao-va-lan-bien-9.jpg" class="img-fluid" alt="image">
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-12 col-sm-12 right">
+                                <div class="row gy-4">
+                                    <div class="col-md-12 col-sm-12 small">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="image">
+                                                    <img src="assets/image/tour-4-dao-va-lan-bien-9.jpg"
+                                                        class="img-fluid" alt="image">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="image">
+                                                    <img src="assets/image/tour-4-dao-va-lan-bien-9.jpg"
+                                                        class="img-fluid" alt="image">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 big">
+                                        <img style="max-height: calc(464px - 24px - 156px); object-fit: cover; width: 100%;"
+                                            src="assets/image/caravan-xuyen-rung-xuong-bien.jpg" class="img-fluid"
+                                            alt="image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section> -->
+            </div>
+            <div class="end">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div>
+                                        <img [src]="tour?.image" alt="" style="max-width: 620px;">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <h1 class="title">{{tour?.titleTour}}</h1>
+
+                                    <div class="time" style="margin-bottom: 20px;">
+                                        <p class="p">Đánh giá: {{ tourRatingResponse }} ⭐</p>
+                                    </div>
+
+                                    <span class="sale-price"
+                                        style="justify-content: flex-start; margin-bottom: 16px; color: red;">_______</span>
+
+                                    <div class="sale-price" style="justify-content: flex-start;">
+                                        <p><span style="font-size: 36px;" class="price">{{tour?.price | currency: 'VND'
+                                                }}</span></p>
+                                    </div>
+
+                                    <div class="time">
+                                        <p class="p">Khởi hành: <b>{{tour?.departureDate | date: 'dd/MM/yyyy'}}</b></p>
+                                        <p class="p">Trở về: <b>{{tour?.returnDate | date: 'dd/MM/yyyy'}}</b></p>
+                                        <p class="p">Thời gian: <b>{{tour?.duration}}</b></p>
+                                    </div>
+
+                                    <div style="display: flex; justify-content: space-around;">
+                                        <div>
+                                            <a routerLink="/booking-page/{{tour?.idTour}}" class="add-to-cart"
+                                                style="width: 120px;">
+                                                <i class="fal fa-shopping-cart"></i>
+                                                Đặt ngay
+                                            </a>
+                                        </div>
+                                        <!-- <div>
+                                            <a href="#" class="add-to-group" data-bs-toggle="modal"
+                                                style="width: 120px;" data-bs-target="#supportModal">
+                                                Liên hệ tư vấn
+                                            </a>
+                                        </div> -->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="mt-5">Mô tả</h4>
+                            </div>
+
+                            <div class="s-title-03 tour-des" [innerHTML]="formatContent(tour?.description || '')">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12 hide-in-mobile">
+
+                            <aside>
+                                <div role="tabpanel" class="tabArea">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs nav-justified" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#new" aria-controls="new" role="tab" data-toggle="tab"
+                                                aria-expanded="true">TIN MỚI</a>
+                                        </li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active" id="new">
+                                            <div class="media" *ngFor="let post of posts">
+                                                <div class="row">
+                                                    <div class="col-3"> <a class="media-left"
+                                                            href="/vi/tuyen-diem/249/cap-nhat-diem-check-in-o-dubai-abu-dhabi">
+                                                            <img class="media-object"
+                                                                style="border-radius: 4px; max-width: 60px;"
+                                                                width="70px" [src]="post.image" alt="Image">
+                                                        </a></div>
+                                                    <div class="col-7">
+                                                        <div class="media-body">
+                                                            <p>
+                                                                <a routerLinkActive="/post-page"
+                                                                    class="media-heading">{{post.titlePost}}
+                                                                </a>
+                                                                <br>
+                                                                <i class="fa fa-calendar"
+                                                                    aria-hidden="true"></i>{{post.dateAdded | date:
+                                                                'dd/MM/yyyy'}}
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <app-evaluate [id]="tourId"></app-evaluate>
+    <div class="mb-4"></div>
+    <app-footer></app-footer>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="/public/assets/lib/jquery.easing.1.3.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script type="text/javascript">
+        new WOW().init();
+    </script>
+
+    <script src="/public/assets/js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!-- Header Start -->
+<header class="header container-fluid">
+    <nav class="navbar-menu px-3 py-2">
+        <a routerLink="/home-page" class="nav-logo">KIMTUYEN Travel</a>
+        <ul class="nav-menu p-0">
+            <li class="nav-item mr-xl-5" style="padding-right: 30px;">
+                <a routerLink="/home-page" class="nav-link menu-text third after">Trang chủ</a>
+            </li>
+
+            <li class="nav-item mr-xl-5" style="padding-right: 30px;">
+                <a routerLink="/post-page" class="nav-link menu-text third after tour-action">Bài đăng</a>
+            </li>
+            <li class="nav-item mr-xl-5" style="padding-right: 30px;">
+                <a routerLink="/contact-page" class="nav-link menu-text third after">Liên hệ</a>
+            </li>
+        </ul>
+        <form class="d-flex" (ngSubmit)="doSearch(myInput.value)">
+            <input class="form-control me-2" #myInput type="search" [(ngModel)]="searchTerm" name="searchTerm"
+                placeholder="Tìm kiếm điểm đến...." aria-label="Search" style="min-width: 200px;" value=" "
+                (keyup.enter)="doSearch(myInput.value)">
+            <button type="submit" class="btn btn-light" style="min-width: 100px; min-height: 40px;">
+                Search
+            </button>
+            <div style="width: 100px; margin: auto;" *ngIf="isLogin">
+                <a style="height: 100%;width: 100%; padding-left: 24px;" routerLink="/cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+            </div>
+            <div class="dropdown" style="height: 100%; width: 100%; margin: auto;" *ngIf="isLogin">
+                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                    style="width: 100%; border: none;">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+                <ul class="dropdown-menu p-2">
+                    <!-- <li><button class="dropdown-item" type="button"><i class="fa-solid fa-gear"></i> Cài đặt thông
+                            tin</button></li> -->
+                    <li *ngIf="user.role === 'ADMIN'">
+                        <button class="dropdown-item" type="button">
+                            <i class="fa-solid fa-list"></i>
+                            <a style="text-decoration: none; color: black;" routerLink="/quan-ly">Quản lý</a>
+                        </button>
+                    </li>
+                    <li><button class="dropdown-item" type="button" (click)="logout()"><i
+                                class="fa-solid fa-right-from-bracket"></i> Đăng xuất</button></li>
+                </ul>
+            </div>
+
+            <div *ngIf="!isLogin" class="d-flex p-1">
+                <button type="button" class="btn btn-light">
+                    <div class="d-flex p-2" style="padding-right: 5px; align-items: center; white-space: nowrap;">
+                        <i class="fa-solid fa-user"></i>
+                        <div style="margin-left: 10px; font-size: 16px;">
+                            <a routerLink="/dang-nhap" style="color:black;;"> Đăng nhập</a>
+                        </div>
+                    </div>
+                </button>
+                <button style=" white-space: nowrap;" type="button" class="btn btn-primary btn-lg">
+                    <div style="margin-left: 8px; margin-right: 8px; font-size: 16px; font-weight: bold;">
+                        <a routerLink="/dang-ky" style="color:white;;"> Đăng ký</a>
+                    </div>
+                </button>
+            </div>
+        </form>
+
+    </nav>
+</header>
+<!-- Header End -->

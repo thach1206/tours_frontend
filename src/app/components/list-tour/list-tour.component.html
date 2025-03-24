@@ -1,0 +1,40 @@
+<div class="tourdulich" id="tourSection">
+    <div class="row">
+        <div class="adventure">
+            <h3><b>Tour du lịch</b></h3>
+        </div>
+        <!-- Mỗi tour chiếm 1/4 chiều rộng của row -->
+        <div *ngFor="let tour of tourList" class="col-lg-3 col-md-6 col-sm-12 wow fadeInUp p-2" data-wow-delay="0.4s">
+            <div *ngIf="tour.statusAction === 'ACTIVE'">
+                <div class="card" style="border-radius: 10px;">
+                    <a routerLink="/detail-page/{{tour.idTour}}">
+                        <img [src]="tour.image" alt="Image"
+                            style="border-top-left-radius: 10px; border-top-right-radius: 10px;" class="card-img-top">
+                    </a>
+                    <div class="card-body" style="padding: 10px;">
+
+                        <p class="Text-tour">{{ tour.departureDate | date: 'dd/MM/yyyy' }} - {{ tour.duration }}</p>
+                        <a href="#">
+                            <h5 class="card-title fz-25">{{tour.titleTour}}</h5>
+                        </a>
+                        <div class="flex">
+                            <p class="card-text color-blue fz-20">Mã tour:</p>
+                            <p class="Ma-tour color-blue fz-20" id="matourgd"><i
+                                    class="fas fa-receipt color-blue"></i>{{tour.idTour}}</p>
+                        </div>
+                        <p class="color-blue fz-20">Điểm đến: {{tour.address}}</p>
+                        <div class="price-tour-family">
+                            <p class="color-red fz-25">{{ tour.price | currency: 'VND' }}</p>
+                        </div>
+                        <div class="btn-tour-family">
+                            <a routerLink="/booking-page/{{tour.idTour}}" class="btn-buy-family fz-20"><i
+                                    class="fas fa-shopping-cart"></i> Đặt ngay</a>
+                            <a routerLink="/detail-page/{{tour.idTour}}" class="btn-describe-family fz-20">Xem chi
+                                tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

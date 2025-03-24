@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Upvex - Responsive Admin Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
+    <meta content="Coderthemes" name="author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <div class="card-body">
+        <div class="d-flex" style="justify-content: space-between;">
+            <h5 class="mt-0">Quản lý Khuyến mãi</h5>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPromotionModal">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+
+        <p class="sub-header"></p>
+        <div class="table-responsive">
+            <table class="table table-centered mb-0" id="inline-editable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>code</th>
+                        <th>Giảm (%)</th>
+                        <th>Giảm tối đa</th>
+                        <th>Tên Voucher</th>
+                        <th>Voucher ẩn</th>
+                        <th>Được áp dụng</th>
+                        <th>Số lượng còn lại</th>
+                        <th>Ngày tạo</th>
+                        <th>Ngày áp dụng</th>
+                        <th>Ngày hết hạn</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody *ngFor="let promotion of promotions">
+                    <tr>
+                        <td>{{promotion.id}}</td>
+                        <td>{{promotion.code}}</td>
+                        <td>{{promotion.discountPercentage}}</td>
+                        <td>{{promotion.maxDiscountAmount}}</td>
+                        <td>{{promotion.description}}</td>
+                        
+                        <td>{{promotion.hidden}}</td>
+                        <td>{{promotion.active}}</td>
+                        <td>{{promotion.qualityOnHand}}</td>
+                        <td>{{promotion.dateAdded | date:'dd/MM/yy'}}</td>
+                        <td>{{promotion.startDate | date:'dd/MM/yy'}}</td>
+                        <td>{{promotion.endingDate | date:'dd/MM/yy'}}</td>
+
+                        <td>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#editPromotionModal"
+                                style="border: none;" (click)="editPromotion(promotion.id)">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button data-bs-toggle="modal" data-bs-target="#deleteModal" style="border: none;"
+                                (click)="setCurrentId(promotion.id)">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> <!-- end .table-responsive-->
+    </div> <!-- end card-body -->
+
+
+    <!-- Modal edit-->
+    <div class="modal fade" id="editPromotionModal" tabindex="-1" aria-labelledby="editPromotionModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editPromotionModalLabel">Chỉnh Sửa Khuyến mãi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="discountPercentage" class="form-label">Giảm (%)</label>
+                                <input type="number" class="form-control" id="discountPercentage"
+                                    [(ngModel)]="form.discountPercentage" name="discountPercentage">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="maxDiscountAmount" class="form-label">Giảm tối đa</label>
+                                <input type="number" class="form-control" id="maxDiscountAmount"
+                                    [(ngModel)]="form.maxDiscountAmount" name="maxDiscountAmount">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Tên Voucher</label>
+                            <input type="text" class="form-control" id="description" [(ngModel)]="form.description"
+                                name="description">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="qualityOnHand" class="form-label">Số lượng còn lại</label>
+                            <input type="number" class="form-control" id="qualityOnHand"
+                                [(ngModel)]="form.qualityOnHand" name="qualityOnHand">
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="hidden" class="form-label">Voucher ẩn</label>
+                                <select class="form-control" id="hidden" name="hidden" [(ngModel)]="form.hidden">
+                                    <option [ngValue]="true">True</option>
+                                    <option [ngValue]="false">False</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="active" class="form-label">Được áp dụng</label>
+                                <select class="form-control" id="active" name="active" [(ngModel)]="form.active">
+                                    <option [ngValue]="true">True</option>
+                                    <option [ngValue]="false">False</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="startDate" class="form-label">Ngày áp dụng</label>
+                                <input type="datetime-local" class="form-control" id="startDate"
+                                    [(ngModel)]="form.startDate" name="startDate">
+                            </div>
+
+                            <div class="mb-3 col">
+                                <label for="endingDate" class="form-label">Ngày hết hạn</label>
+                                <input type="datetime-local" class="form-control" id="endingDate"
+                                    [(ngModel)]="form.endingDate" name="endingDate">
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary" (click)="saveChanges()">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal delete -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary" (click)="deletePromotion()">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal create -->
+    <div class="modal fade" id="createPromotionModal" tabindex="-1" aria-labelledby="createPromotionModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createPromotionModalLabel">Tạo Bài Khuyến mãi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Tên Voucher</label>
+                            <input type="text" class="form-control" id="description" [(ngModel)]="form.description"
+                                name="description">
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="discountPercentage" class="form-label">Giảm (%)</label>
+                                <input type="number" class="form-control" id="discountPercentage"
+                                    [(ngModel)]="form.discountPercentage" name="discountPercentage">
+                            </div>
+
+                            <div class="mb-3 col">
+                                <label for="maxDiscountAmount" class="form-label">Giảm tối đa</label>
+                                <input type="number" class="form-control" id="maxDiscountAmount"
+                                    [(ngModel)]="form.maxDiscountAmount" name="maxDiscountAmount">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 col">
+                            <label for="qualityOnHand" class="form-label">Số lượng còn lại</label>
+                            <input type="number" class="form-control" id="qualityOnHand"
+                                [(ngModel)]="form.qualityOnHand" name="qualityOnHand">
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="hidden" class="form-label">Voucher ẩn</label>
+                                <select class="form-control" id="hidden" name="hidden" [(ngModel)]="form.hidden">
+                                    <option [ngValue]="true">True</option>
+                                    <option [ngValue]="false">False</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="active" class="form-label">Được áp dụng</label>
+                                <select class="form-control" id="active" name="active" [(ngModel)]="form.active">
+                                    <option [ngValue]="true">True</option>
+                                    <option [ngValue]="false">False</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="startDate" class="form-label">Ngày áp dụng</label>
+                                <input type="datetime-local" class="form-control" id="startDate"
+                                    [(ngModel)]="form.startDate" name="startDate">
+                            </div>
+
+                            <div class="mb-3 col">
+                                <label for="endingDate" class="form-label">Ngày hết hạn</label>
+                                <input type="datetime-local" class="form-control" id="endingDate"
+                                    [(ngModel)]="form.endingDate" name="endingDate">
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary" (click)="createPromotion()">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

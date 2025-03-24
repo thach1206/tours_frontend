@@ -1,0 +1,161 @@
+/* mã đơn */
+
+.warp-mark {
+    color: #4d4aef;
+    font-size: 13px;
+    margin-bottom: 5px;
+    padding-right: 8px;
+}
+
+.fa-ticket:before {
+    content: "\f145";
+}
+
+i {
+    padding-right: 8px;
+}
+
+/* khám phá bình châu */
+.title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #2d4271;
+    line-height: 30px;
+    margin-bottom: 12px;
+    max-width: 100%;
+}
+
+* *::before *::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+p {
+    font-size: 13px;
+    color: #2d4271;
+    margin: 0;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.price {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fd5056;
+    line-height: 28px;
+}
+
+.add-to-cart {
+    background: linear-gradient(64.4deg, #fd5056 21.33%, #fe2214 67.61%);
+    border-radius: 5px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 192px;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.add-to-group {
+    border: 1px solid #2d4271;
+    border-radius: 5px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 192px;
+    color: #2d4271;
+}
+
+.tour-detail a {
+    text-decoration: none;
+}
+
+.section-01 {
+    padding-top: 32px;
+    padding-bottom: 28px;
+}
+
+/* cuoi cung */
+.end {
+    margin-top: 20px;
+}
+
+.sale-price {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.tour-des {
+    font-size: 16px;
+    color: #2d4271;
+}
+
+.time {
+    border-radius: 2px;
+    border-color: black;
+    font-size: 16px;
+    color: #2d4271;
+}
+
+.p {
+    font-size: 16px;
+}
+
+img {
+    width: 1500px;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.image {
+    margin-bottom: 0px;
+}
+
+.fa-heart {
+    color: #fd5056 !important;
+}
+
+@media (max-width: 768px) {
+    .price {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+        color: #fd5056;
+        line-height: 28px;
+    }
+
+    .right {
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .group-add-cart {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .tour-detail .entry-head .section-02 .right .small .image {
+
+        padding-top: 0;
+        padding-right: 10px;
+        width: 100%;
+        height: 100%;
+        -o-object-fit: cover;
+        object-fit: cover;
+        border-radius: 10px
+    }
+
+}

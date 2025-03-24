@@ -1,0 +1,304 @@
+/* Zalo */
+.zalo-container {
+    position: relative;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .zalo-container.fix {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    right: 15px;
+    bottom: 110px;
+    z-index: 10;
+  }
+  
+  .zalo-container a {
+    display: block;
+  }
+  
+  .zalo-container span {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -ms-align-items: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #1182FC;
+    position: relative;
+  }
+  
+  @keyframes zoomIn_zalo {
+    from {
+      opacity: 0;
+      transform: scale3d(.3, .3, .3);
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  .zoomIn_zalo {
+    animation-name: zoomIn_zalo;
+  }
+  
+  .animated_zalo {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+  }
+  
+  .animated_zalo.infinite {
+    animation-iteration-count: infinite;
+  }
+  
+  .cmoz-alo-circle {
+    width: 50px;
+    height: 50px;
+    top: -5px;
+    right: -5px;
+    position: absolute;
+    background-color: transparent;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    border: 2px solid rgba(17, 130, 252, .8);
+    opacity: .1;
+    border-color: #1182FC;
+    opacity: .5;
+  }
+  
+  .cmoz-alo-circle-fill {
+    width: 60px;
+    height: 60px;
+    top: -10px;
+    position: absolute;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    border: 2px solid transparent;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+    background-color: rgba(17, 130, 252, 0.45);
+    opacity: .75;
+    right: -10px;
+  }
+  
+  @-webkit-keyframes pulse_zalo {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  @keyframes pulse_zalo {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  .pulse_zalo {
+    -webkit-animation-name: pulse_zalo;
+    animation-name: pulse_zalo;
+  }
+  
+  .login-container {
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border-radius: 10px;
+  }
+  
+  .login-content-container {
+    max-width: 800px;
+    min-width: 300px;
+    width: 100%;
+    align-self: center;
+  }
+  
+  .login-form-container {
+    border-radius: 10px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden;
+  }
+  
+  .login-form-1 {
+    padding: 5%;
+  
+  }
+  
+  .login-form-1 h3 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .login-form-2 {
+    padding: 3%;
+    background: linear-gradient(to left, #c28b42, #9d3b76);
+  }
+  
+  .login-form-2 h3 {
+    text-align: center;
+    color: #fff;
+  }
+  
+  .login-container form {
+    padding: 5%;
+  }
+  
+  .container-input {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+  }
+  
+  .container-input input {
+    border: 0px;
+    border-radius: 0px;
+    padding: 15px 10px;
+    font-weight: bold;
+  }
+  
+  .btnSubmit {
+    width: 50%;
+    border-radius: 5px;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    background-color: #884f75;
+    color: white;
+    background-image: linear-gradient(to left, #c28b42, #9d3b76);
+    display: inline-block;
+    width: 100%;
+    margin: 10px 0px;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  
+  .btnSubmitZalo {
+    width: 50%;
+    border-radius: 5px;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    background-color: #1282fc;
+    color: white;
+    display: inline-block;
+    width: 100%;
+    margin: 5px 0px 10px 0px;
+    border-radius: 10px;
+    padding: 5px;
+  }
+  
+  .ForgetPwd {
+    color: #0062cc;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .message {
+    padding: 0;
+    text-align: center;
+  }
+  
+  #app_loading {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffffc2;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    color: #000;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  #app_loading.show {
+    display: inherit !important;
+  }
+  
+  h1.title {
+    font-weight: 700;
+    line-height: 130%;
+    color: #9c9e3d;
+  }
+  
+  h1.title .title-feature {
+    color: #fe9801;
+  }
+  
+  h2.title {
+    font-weight: 800;
+    line-height: 130%;
+    color: #000;
+  }
+  
+  h2.title .title-feature {
+    color: #9e3c53;
+  }
+  
+  .image-dowload-app {
+    border-radius: 10px;
+    display: inline-block;
+  }
+  
+  .form-group {
+    position: relative;
+  }
+  
+  .invalid-feedback {
+    position: absolute;
+    bottom: 3px;
+    left: 10px;
+    font-size: 11px;
+  }
+  
+  .password-container {
+    position: relative;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  

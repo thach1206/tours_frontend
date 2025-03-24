@@ -1,0 +1,31 @@
+<form class="d-flex" (ngSubmit)="doSearch()">
+    <div class="search-bar-container">
+        <div class="search-bar">
+            <div class="search-field">
+                <label>Điểm đến của bạn là:</label>
+                <input type="text" class="form-control" placeholder="Nhập địa danh bạn muốn đến!"  
+                [(ngModel)]="place" name="place">
+            </div>
+            <div class="search-field" style="display: none;">
+                <label>Bạn định đi khi nào?</label>
+                <div class="date-inputs">
+                    <input type="date" class="form-control" placeholder="Ngày bắt đầu"  [(ngModel)]="dateStart" name="dateStart"> 
+                    <span>~</span>
+                    <input type="date" class="form-control" placeholder="Ngày kết thúc" [(ngModel)]="dateEnd" name="dateEnd">> 
+                </div>
+            </div>
+            <!-- <div class="search-field">
+                <label>Search theo:</label>
+                <select class="form-select">
+                    <option>Tất cả</option>
+                    <option>Tour trong nước</option>
+                    <option>Tour nước ngoài</option>
+                </select>
+            </div> -->
+            <div class="search-field">
+                <label>Bạn đã sẵn sàng chưa?</label>
+                <button class="btn btn-success">Tìm kiếm Tour</button>
+            </div>
+        </div>
+    </div>
+</form>

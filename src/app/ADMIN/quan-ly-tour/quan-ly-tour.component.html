@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Upvex - Responsive Admin Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
+    <meta content="Coderthemes" name="author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <div class="card-body">
+        <div class="d-flex" style="justify-content: space-between;">
+            <h5 class="mt-0">Quản lý tour</h5>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTourModal">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+
+        <p class="sub-header"></p>
+        <div class="table-responsive">
+            <table class="table table-centered mb-0" id="inline-editable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Adult Price</th>
+                        <th>Children Price</th>
+                        <th>Baby Price</th>
+                        <th>Sale (%)</th>
+                        <th>Departure Date</th>
+                        <th>Return Date</th>
+                        <th>Description</th>
+                        <th>Address</th>
+                        <th>Duration</th>
+                        <th>Type</th>
+                        <th>Views</th>
+                        <th>Votes</th>
+                        <th>Purchase Count</th>
+                        <th>Status Action</th>
+                        <th>Date Added</th>
+                        <th>Date Edited</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tr *ngFor="let tour of tourList">
+                    <td>{{ tour.idTour }}</td>
+                    <td style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 300px;"
+                        title="{{ tour.titleTour }}">
+                        {{ tour.titleTour }}
+                    </td>
+                    <td>{{ tour.price | currency:'VND' }}</td>
+                    <td>{{ tour.childPrice | currency:'VND' }}</td>
+                    <td>{{ tour.babyPrice | currency:'VND' }}</td>
+
+                    <td>{{ tour.sale }}</td>
+                    <td>{{ tour.departureDate | date:'dd/MM/yyyy HH:mm' }}</td>
+                    <td>{{ tour.returnDate | date:'dd/MM/yyyy HH:mm' }}</td>
+                    <td style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 300px;">
+                        {{ tour.description }}
+                    </td>
+                    <td style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 300px;">
+                        {{ tour.address }}
+                    </td>
+                    <td>{{ tour.duration }}</td>
+                    <td>{{ tour.type }}</td>
+                    <td>{{ tour.views }}</td>
+                    <td>{{ tour.votes }}</td>
+                    <td>{{ tour.purchaseCount }}</td>
+                    <td>{{ tour.statusAction }}</td>
+                    <td>{{ tour.dateAdded | date:'dd/MM/yyyy' }}</td>
+                    <td>{{ tour.dateEdited | date:'dd/MM/yyyy' }}</td>
+
+                    <td>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#editTourModal"
+                            style="border: none;" (click)="editTour(tour.idTour)">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                    </td>
+                    <td><button data-bs-toggle="modal" data-bs-target="#deleteTourModal" style="border: none;"
+                            (click)="setTourId(tour.idTour)">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div> <!-- end .table-responsive-->
+    </div> <!-- end card-body -->
+
+    <!-- Modal Edit Tour -->
+    <div class="modal fade" id="editTourModal" tabindex="-1" aria-labelledby="editTourModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editTourModalLabel">Chỉnh Sửa Tour</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form #editTourForm="ngForm">
+                        <div class="mb-3">
+                            <label for="titleTour" class="form-label">Tên Tour</label>
+                            <input type="text" id="titleTour" class="form-control" [(ngModel)]="form.titleTour"
+                                name="titleTour" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="price" class="form-label">Giá người lớn</label>
+                                <input type="number" id="price" class="form-control" [(ngModel)]="form.price"
+                                    name="price" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="childPrice" class="form-label">Giá trẻ em</label>
+                                <input type="number" id="childPrice" class="form-control" [(ngModel)]="form.childPrice"
+                                    name="childPrice" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="babyPrice" class="form-label">Giá em bé</label>
+                                <input type="number" id="babyPrice" class="form-control" [(ngModel)]="form.babyPrice"
+                                    name="babyPrice" required>
+                            </div>
+                            <!-- <div class="col-md-6 mb-3">
+                                <label for="sale" class="form-label">Giảm Giá (%)</label>
+                                <input type="number" id="sale" class="form-control" [(ngModel)]="form.sale" name="sale">
+                            </div> -->
+                        </div>
+                        <div class="mb-3">
+                            <label for="departureDate" class="form-label">Ngày Khởi Hành</label>
+                            <input type="datetime-local" id="departureDate" class="form-control"
+                                [(ngModel)]="form.departureDate" name="departureDate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="returnDate" class="form-label">Ngày trở về</label>
+                            <input type="datetime-local" id="returnDate" class="form-control"
+                                [(ngModel)]="form.returnDate" name="returnDate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Mô Tả</label>
+                            <quill-editor id="description" class="form-control" [(ngModel)]="form.description"
+                                name="description"  [modules]="editorModules">
+                            </quill-editor>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Địa Chỉ</label>
+                            <input type="text" id="address" class="form-control" [(ngModel)]="form.address"
+                                name="address">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="duration" class="form-label">Thời Lượng</label>
+                                <input type="text" id="duration" class="form-control" [(ngModel)]="form.duration"
+                                    name="duration">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="type" class="form-label">Loại Tour</label>
+                                <select id="type" class="form-control" [(ngModel)]="form.type" name="type">
+                                    <option value="TOUR_BIEN_DAO">Tour Biển Đảo</option>
+                                    <option value="TOUR_HANH_TRINH_XANH">Tour Hành Trình Xanh</option>
+                                    <option value="TOUR_XE_TU_LAI">Tour Xe Tự Lái</option>
+                                    <option value="TOUR_THANH_LOC">Tour Thánh Lộc</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="statusAction" class="form-label">Trạng Thái</label>
+                            <select type="text" id="statusAction" class="form-control" [(ngModel)]="form.statusAction"
+                            name="statusAction">
+                                <option value="ACTIVE">ACTIVE</option>
+                                <option value="DELETE">DELETE</option>
+                            </select>
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Ảnh</label>
+                            <input type="file" id="image" class="form-control" (change)="onFileSelected($event)">
+                            <img *ngIf="form.image" [src]="form.image" class="mt-3" style="width: 100px; height: auto;">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" (click)="saveChanges()">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal delete -->
+    <div class="modal fade" id="deleteTourModal" tabindex="-1" aria-labelledby="deleteTourModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteTourModalLabel">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary" (click)="deleteTour()">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal create -->
+    <div class="modal fade" id="createTourModal" tabindex="-1" aria-labelledby="createTourModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createTourModalLabel">Tạo Tour</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form #editTourForm="ngForm">
+                        <div class="mb-3">
+                            <label for="titleTour" class="form-label">Tên Tour</label>
+                            <input type="text" id="titleTour" class="form-control" [(ngModel)]="form.titleTour"
+                                name="titleTour" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="price" class="form-label">Giá</label>
+                                <input type="number" id="price" class="form-control" [(ngModel)]="form.price"
+                                    name="price" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="childPrice" class="form-label">Giá trẻ em</label>
+                                <input type="number" id="childPrice" class="form-control" [(ngModel)]="form.childPrice"
+                                    name="childPrice" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="babyPrice" class="form-label">Giá em bé</label>
+                                <input type="number" id="babyPrice" class="form-control" [(ngModel)]="form.babyPrice"
+                                    name="babyPrice" required>
+                            </div>
+                            <!-- <div class="col-md-6 mb-3">
+                                <label for="sale" class="form-label">Giảm Giá (%)</label>
+                                <input type="number" id="sale" class="form-control" [(ngModel)]="form.sale" name="sale">
+                            </div> -->
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="departureDate" class="form-label">Ngày Khởi Hành</label>
+                                <input type="datetime-local" id="departureDate" class="form-control"
+                                    [(ngModel)]="form.departureDate" name="departureDate">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="returnDate" class="form-label">Ngày Trở về</label>
+                                <input type="datetime-local" id="returnDate" class="form-control"
+                                    [(ngModel)]="form.returnDate" name="returnDate">
+                            </div>
+                        </div>
+                     
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Mô Tả</label>
+                            <quill-editor id="description" class="form-control" [(ngModel)]="form.description"
+                                name="description"  [modules]="editorModules">
+                            </quill-editor>
+                        </div>
+
+                        
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Địa Chỉ</label>
+                            <input type="text" id="address" class="form-control" [(ngModel)]="form.address"
+                                name="address">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="duration" class="form-label">Thời Lượng</label>
+                                <input type="text" id="duration" class="form-control" [(ngModel)]="form.duration"
+                                    name="duration">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="type" class="form-label">Loại Tour</label>
+                                <select id="type" class="form-control" [(ngModel)]="form.type" name="type">
+                                    <option value="TOUR_BIEN_DAO">Tour Biển Đảo</option>
+                                    <option value="TOUR_HANH_TRINH_XANH">Tour Hành Trình Xanh</option>
+                                    <option value="TOUR_XE_TU_LAI">Tour Xe Tự Lái</option>
+                                    <option value="TOUR_THANH_LOC">Tour Thanh Lọc Cơ Thể</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="statusAction" class="form-label">Trạng Thái</label>
+                            <input type="text" id="statusAction" class="form-control" [(ngModel)]="form.statusAction"
+                                name="statusAction">
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Ảnh</label>
+                            <input type="file" id="image" class="form-control" (change)="onFileSelected($event)">
+                            <img *ngIf="form.image" [src]="form.image" class="mt-3" style="width: 100px; height: auto;">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" (click)="createTour()">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

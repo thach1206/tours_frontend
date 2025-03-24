@@ -1,0 +1,227 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  /* Màu nền sáng */
+  margin: 0;
+  padding: 0;
+}
+
+
+.container {
+  max-width: 1140px;
+  /* Giới hạn chiều rộng */
+  margin: 0 auto;
+  /* Căn giữa nội dung */
+  padding: 15px;
+  background-color: #fff;
+  /* Màu nền trắng */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Đổ bóng nhẹ */
+  border-radius: 8px;
+  /* Bo góc */
+}
+
+.blog-post {
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e9ecef;
+  /* Đường viền dưới bài post */
+  margin-bottom: 30px;
+}
+
+.blog-post-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+.blog-post-meta {
+  font-size: 14px;
+  color: #6c757d;
+  /* Màu chữ nhạt */
+  margin-bottom: 15px;
+}
+
+.image img {
+  width: 100%;
+  border-radius: 5px;
+  /* Bo góc ảnh */
+}
+
+.p-4 {
+  padding: 1.5rem;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.position-sticky {
+  position: sticky;
+}
+
+/* Toàn bộ cột "Tin mới" */
+/* Phần container chính */
+.news-container {
+  width: 300px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề phần "Tin mới" */
+.news-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+/* Danh sách bài viết */
+.news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Mỗi bài viết */
+.news-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* Hình ảnh bài viết */
+.news-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Nội dung bài viết */
+.news-content {
+  flex: 1;
+}
+
+.news-content a {
+  text-decoration: none;
+  color: #000;
+  /* Màu chữ đen mặc định */
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.news-content a:hover {
+  color: #007bff;
+  /* Đổi sang màu xanh dương khi trỏ chuột */
+}
+
+.news-date {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Phần "Tuyến điểm" */
+.destinations-section {
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  /* Màu nền nhạt */
+  border-radius: 8px;
+  /* Bo góc */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Đổ bóng nhẹ */
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #007bff;
+  /* Đường gạch dưới màu xanh */
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.destinations-container {
+  display: flex;
+  gap: 20px;
+  /* Khoảng cách giữa các điểm */
+  flex-wrap: wrap;
+  /* Tự động xuống dòng khi màn hình nhỏ */
+  justify-content: space-between;
+}
+
+.destination-item {
+  background-color: #fff;
+  border-radius: 8px;
+  /* Bo góc hộp */
+  overflow: hidden;
+  /* Ẩn các phần thừa */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Đổ bóng */
+  flex: 1 1 calc(33.333% - 20px);
+  /* Chia đều thành 3 cột */
+  max-width: calc(33.333% - 20px);
+  /* Giới hạn chiều rộng */
+  display: flex;
+  flex-direction: column;
+}
+
+.destination-img {
+  width: 100%;
+  /* Hình ảnh full chiều rộng */
+  height: 200px;
+  /* Chiều cao cố định */
+  object-fit: cover;
+  /* Đảm bảo hình không bị méo */
+}
+
+.destination-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* Khoảng cách giữa tiêu đề và mô tả */
+}
+
+.destination-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.destination-desc {
+  font-size: 14px;
+  color: #666;
+  /* Màu chữ nhạt hơn */
+}
+
+/* Responsive cho màn hình nhỏ */
+@media (max-width: 768px) {
+  .destinations-container {
+    flex-direction: column;
+    /* Xếp dọc các điểm đến */
+    gap: 20px;
+  }
+
+  .destination-item {
+    max-width: 100%;
+    /* Full chiều rộng màn hình nhỏ */
+  }
+}
+
+.formatted-content span img {
+  max-width: 100%;
+  height: auto; /* Giữ tỷ lệ hình ảnh */
+}

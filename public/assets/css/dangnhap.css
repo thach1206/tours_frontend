@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  
+  hr {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  @media (min-width: 1400px) {
+    .container,
+    .container-sm,
+    .container-md,
+    .container-lg,
+    .container-xl,
+    .container-xxl {
+      max-width: 1320px;
+    }
+  }
+  
+  main {
+    display: block;
+  }
+  
+  .card {
+    border: none;
+    box-shadow: none !important;
+  }
+  
+  .login {
+    text-align: center;
+    min-height: 100%;
+  }
+  
+  .login .wrapper {
+    min-height: 0 !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0;
+  }
+  
+  .login .wrapper .form-wrap {
+    width: 550px;
+    overflow: hidden;
+  }
+  
+  .right {
+    padding: 0 1.5rem !important;
+  }
+  
+  .form-signin {
+    width: 100%;
+    max-width: 400px;
+    padding: 28px 15px !important;
+    margin: auto;
+    background: #f9f9f9;
+    border-radius: 10px;
+  }
+  
+  .tab {
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+  .tab a {
+    text-decoration: none;
+  }
+  
+  .tab a:hover {
+    color: #2d4271;
+  }
+  
+  .signin-btn {
+    background-color: #fff;
+    color: #2d4271;
+    border-radius: 10px 10px 0 0;
+    text-decoration: none !important;
+  }
+  
+  .signup-btn {
+    color: #fff;
+    text-decoration: none !important;
+  }
+  
+  .signup-btn:hover {
+    color: #fff;
+  }
+  
+  form {
+    text-align: left;
+  }
+  
+  .form-divider {
+    text-align: center;
+    margin: 1rem 0 !important;
+    font-size: 18px;
+  }
+  
+  .add-on {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+  
+  .add-on-btn {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 5px;
+  }
+  
+  .text-end {
+    text-align: right !important;
+  }
+  
+  .text-end a {
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .text-end a:hover {
+    color: #425a8a;
+  }
+  
+  .btn-login {
+    color: #fff;
+    background-color: #fd5056;
+    border-color: #fd5056;
+    transition: all 500ms;
+  }
+  
+  .btn-login:hover {
+    color: #fff;
+    background-color: #d74449;
+    border-color: #ca4045;
+  }
+  
+  .fw-bold {
+    font-weight: 700 !important;
+  }
+  

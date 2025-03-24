@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xem chi tiết</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+
+<body>
+    <!-- Header Start -->
+    <app-header></app-header>
+    <hr class="mt-0">
+    <h2 class="text-center my-3" style="color: #2d4271;">Đặt Tour</h2>
+    <!-- Header End -->
+    <main cl="main">
+        <div class="tour-detail" id="detailPage">
+            <div class="entry-head">
+                <section class="section-01">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="d-flex" style="justify-content: space-around;">
+                                <button class="btn booking-process" *ngFor="let step of steps; let i = index"
+                                    [ngClass]="{ 'active': activeStep === i }" (click)="setActiveStep()">
+                                    {{ step }}
+                                </button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </section>
+
+
+            </div>
+            <div class="end">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <form>
+                                <!-- step 1 -->
+                                <div *ngIf="currentStep === 1" class="step1">
+                                    <p class="title" style="font-size: 26px;"><b>SỐ LƯỢNG HÀNH KHÁCH</b></p>
+                                    <div class="container-input">
+                                        <div class="row">
+                                            <div class="form-group col-md-5 col-sm-5 col-xs-12 no-padding">
+                                                <label for="adult" class="form-label">Người lớn</label>
+                                                <input style="border-bottom: 1px solid #ccc;" type="number" name="adult"
+                                                    class="form-control" [(ngModel)]="form.adult"
+                                                    placeholder="Số người lớn" #adult="ngModel" required min="1"
+                                                    (ngModelChange)="onGuestCountChange()" />
+                                                <div *ngIf="adult.invalid && adult.touched" class="text-danger">
+                                                    Người lớn phải lớn hơn hoặc bằng 1.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7 col-sm-7 col-xs-12 no-padding">
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-5 col-sm-5 col-xs-12 no-padding">
+                                                <label for="children" class="form-label">Trẻ em</label>
+                                                <input style="border-bottom: 1px solid #ccc;" type="number"
+                                                    name="children" class="form-control" [(ngModel)]="form.children"
+                                                    placeholder="Số trẻ em" #children="ngModel" required min="0"
+                                                    (ngModelChange)="onGuestCountChange()" />
+                                                <div *ngIf="children.invalid && children.touched" class="text-danger">
+                                                    Số trẻ em phải lớn hơn hoặc bằng 0.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7 col-sm-7 col-xs-12 no-padding">
+                                                <ul class="highlight-text">
+                                                    <li style="list-style: none;"> <i
+                                                            class="fa-solid fa-person-chalkboard"></i> </li>
+                                                    <li>Tour nước ngoài: áp dụng từ 2 đến dưới 12 tuổi</li>
+                                                    <li>Tour trong nước và tour Campuchia: áp dụng từ 6 đến 11 tuổi</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-5 col-sm-5 col-xs-12 no-padding">
+                                                <label for="baby" class="form-label">Em bé</label>
+                                                <input style="border-bottom: 1px solid #ccc;" type="number" name="baby"
+                                                    class="form-control" [(ngModel)]="form.baby" placeholder="Số em bé"
+                                                    #baby="ngModel" required min="0"
+                                                    (ngModelChange)="onGuestCountChange()" />
+                                                <div *ngIf="baby.invalid && baby.touched" class="text-danger">
+                                                    Số em bé phải lớn hơn hoặc bằng 0.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7 col-sm-7 col-xs-12 no-padding">
+                                                <ul class="highlight-text">
+                                                    <li style="list-style: none;"> <i
+                                                            class="fa-solid fa-person-chalkboard"></i> </li>
+                                                    <li>Tour nước ngoài: áp dụng từ Dưới 2 tuổi</li>
+                                                    <li>Tour trong nước và tour Campuchia: áp dụng từ 2 đến 5 tuổi</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1">
+                                        <div class="condition-sgt">
+                                            <label>
+                                                <input type="checkbox" name="acceptPolice"
+                                                    [(ngModel)]="form.acceptPolice" required #acceptPolice="ngModel">
+                                                Tôi đã đọc và đồng ý
+                                                <a href="#" target="_blank">điều khoản</a>
+                                            </label>
+                                            <div *ngIf="acceptPolice.invalid && acceptPolice.touched"
+                                                class="text-danger">
+                                                Bạn phải đồng ý với điều khoản.
+                                            </div>
+                                            <br>
+                                            <div
+                                                style="width:100%;height:250px;overflow-y: scroll;padding: 10px;margin:0;border: 1px solid #ccc;border-right: 2px solid #ccc; margin-top: 10px;">
+                                                <p><strong>Về thông tin khách hàng</strong></p>
+
+                                                <p>Khi đăng ký thanh toán qua mạng, quý khách sẽ được yêu cầu cung cấp
+                                                    một
+                                                    số thông tin cá nhân và thông tin tài khoản.</p>
+
+                                                <p>Đối với thông tin cá nhân: Những thông tin này chỉ để phục vụ cho nhu
+                                                    cầu
+                                                    xác nhận sự mua dịch vụ của quý khách và sẽ hiển thị những nội dung
+                                                    cần
+                                                    thiết trên vé điện tử. Lữ hành KIMTUYEN Travel cũng sẽ sử dụng những
+                                                    thông
+                                                    tin liên lạc này để gửi đến quý khách những sự kiện, những tin tức
+                                                    khuyến mãi và những ưu đãi đặc biệt nếu quý khách đồng ý. Những
+                                                    thông
+                                                    tin này của quý khách sẽ được Lữ hành KIMTUYEN Travel bảo mật và
+                                                    không
+                                                    tiết lộ cho bên thứ ba biết ngoại trừ sự đồng ý của quý khách hoặc
+                                                    là
+                                                    phải tiết lộ theo sự tuân thủ luật pháp quy định.</p>
+
+                                                <p>Đối với thông tin tài khoản: Những thông tin này sẽ được Lữ hành
+                                                    KIMTUYEN Travel và bên thứ ba áp dụng những biện pháp bảo mật cao
+                                                    nhất
+                                                    do
+                                                    các hệ thống thanh toán nổi tiếng trên thế giới như Visa và
+                                                    MasterCard
+                                                    cung cấp nhằm đảm bảo sự an toàn tuyệt đối của thông tin tài khoản
+                                                    quý
+                                                    khách.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="booking-process-btn d-flex mt-5 mb-5" style="justify-content: center;">
+                                        <button type="button" class="btn btn-secondary" [disabled]="!isStep1Valid()"
+                                            (click)="nextStep()">
+                                            Tiếp tục
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <!-- step 1 end -->
+
+                                <!-- step 2 -->
+                                <div *ngIf="currentStep === 2" class="step2">
+                                    <!-- thông tin liên hệ chính -->
+                                    <p class="title" style="font-size: 26px;"><b>THÔNG TIN LIÊN HỆ</b></p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="customerName" class="form-label">Tên:</label>
+                                            <input type="text" class="form-control" id="customerName"
+                                                [(ngModel)]="form.customerName" name="customerName"
+                                                #customerName="ngModel" required minlength="3">
+                                            <div *ngIf="customerName.invalid && customerName.touched"
+                                                class="text-danger">
+                                                Tên không được để trống và phải có ít nhất 3 ký tự.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="phone" class="form-label">Số Điện Thoại: </label>
+                                                <input type="text" class="form-control" id="phone"
+                                                    [(ngModel)]="form.phone" name="phone" #phone="ngModel" required
+                                                    pattern="^(0[3-9]\d{8})$">
+                                                <div *ngIf="phone.invalid && phone.touched" class="text-danger">
+                                                    Số điện thoại phải hợp lệ (bắt đầu bằng 03-09 và đủ 10 chữ số).
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="address" class="form-label">Địa chỉ: </label>
+                                                <input type="text" class="form-control" id="address"
+                                                    [(ngModel)]="form.address" name="address">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">Email: </label>
+                                                <input type="text" class="form-control" id="email"
+                                                    [(ngModel)]="form.email" name="email">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="notes" class="form-label">notes: </label>
+                                        <textarea type="text" class="form-control" id="notes" [(ngModel)]="form.notes"
+                                            name="notes"></textarea>
+                                    </div>
+                                    <!-- thông tin liên hệ chính -->
+                                    <!-- Form thông tin khách hàng khác -->
+                                    <div>
+                                        <p class="title" style="font-size: 26px;"><b>THÔNG TIN KHÁCH HÀNG</b></p>
+                                        <div *ngFor="let customer of form.customerInfoList; let i = index" class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="customerName{{i}}" class="form-label">Tên khách hàng {{i
+                                                        + 1}}: </label>
+                                                    <input type="text" class="form-control" id="customerName{{i}}"
+                                                        [(ngModel)]="customer.customerName" name="customerName{{i}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="phone{{i}}" class="form-label">Số Điện Thoại: </label>
+                                                    <input type="text" class="form-control" id="phone{{i}}"
+                                                        [(ngModel)]="customer.phone" name="phone{{i}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="address{{i}}" class="form-label">Địa chỉ: </label>
+                                                    <input type="text" class="form-control" id="address{{i}}"
+                                                        [(ngModel)]="customer.address" name="address{{i}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="gender{{i}}" class="form-label">Giới tính: </label>
+                                                    <select class="form-control" id="gender{{i}}"
+                                                        [(ngModel)]="customer.gender" name="gender{{i}}">
+                                                        <option value="">Chọn giới tính</option>
+                                                        <option value="male">Nam</option>
+                                                        <option value="female">Nữ</option>
+                                                        <option value="other">Khác</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="booking-process-btn d-flex mt-5 mb-5"
+                                        style="justify-content: space-around;">
+                                        <button type="button" class="btn btn-secondary" (click)="prevStep()">Quay
+                                            lại</button>
+                                        <button type="button" class="btn btn-secondary" [disabled]="!isStep1Valid()"
+                                            (click)="nextStep()">
+                                            Tiếp tục
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <!-- step 2 end -->
+
+                                <!-- step 3 -->
+                                <div *ngIf="currentStep === 3" class="step3">
+                                    <p class="title" style="font-size: 26px;">Xác nhận thanh toán Tour <b
+                                            style="color: rgb(204, 100, 16);">{{tour?.titleTour}}</b></p>
+                                    <!-- Nội dung step 3 -->
+                                    <div class="row mt-3">
+                                        <div>
+                                            <i class="fa fa-calendar" aria-hidden="true"></i>Thời gian:
+                                            <span>{{tour?.duration}}</span>
+                                        </div>
+                                        <div>
+                                            <i class="fa-solid fa-user-group"></i>
+                                            <span>{{form.adult}} người lớn,
+                                                {{form.children}} trẻ em, {{form.baby}} em bé</span>
+                                        </div>
+                                        <label>Voucher</label>
+                                        <div class="scroll-container">
+                                            <div *ngIf="selectedPromotion === null">
+                                                <div *ngFor="let promotion of promotions">
+                                                    <!-- Chỉ hiển thị voucher đã chọn -->
+                                                    <div
+                                                        *ngIf="promotion.active && promotion.qualityOnHand > 0">
+                                                        <div>
+                                                            <strong>Mã:</strong> {{ promotion.code }}
+                                                        </div>
+                                                        <div>
+                                                            <strong>Mô tả:</strong> {{ promotion.description }}
+                                                        </div>
+                                                        <div>
+                                                            <strong>Giảm:</strong> {{ promotion.discountPercentage }}%
+                                                            (Tối đa: {{ promotion.maxDiscountAmount }} VNĐ)
+                                                        </div>
+                                                        <button class="btn btn-primary mt-2"
+                                                            (click)="selectPromotion(promotion)">
+                                                            Chọn voucher này
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="selectedPromotion !== null">
+                                                <div>
+                                                    <strong>Mã:</strong> {{ selectedPromotion.code }}
+                                                </div>
+                                                <div>
+                                                    <strong>Mô tả:</strong> {{ selectedPromotion.description }}
+                                                </div>
+                                                <div>
+                                                    <strong>Giảm:</strong> {{ selectedPromotion.discountPercentage }}%
+                                                    (Tối đa: {{ selectedPromotion.maxDiscountAmount }} VNĐ)
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="booking-process-btn d-flex mt-3 mb-3"
+                                        style="justify-content: space-around;">
+                                        <button type="button" class="btn btn-secondary" (click)="prevStep()">Quay
+                                            lại</button>
+                                        <button type="button" class="btn btn-success" (click)="submitBooking()">
+                                            Hoàn thành
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <!-- step 3 end -->
+
+                                <!-- step 4 -->
+                                <div *ngIf="currentStep === 4" class="step3">
+                                    <div class="product ">
+                                        <div class="product-content">
+                                            <p class="title mb-1" id="title">{{tour?.titleTour}}</p>
+                                            <div *ngIf="isSuccessfull == true">
+                                                <div class="ticket-no-wrap mb-1">
+                                                    <div class="ticket-no">
+                                                        Mã tour:
+                                                        <i class="fas fa-receipt color-blue"></i> {{tour?.idTour}}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="row">
+                                                        <p style="font-size: 26px;" class="text-tour mb-1">Họ và tên khách
+                                                            hàng:
+                                                            <b>{{user?.name}}</b>
+                                                        </p>
+                                                        <p style="font-size: 16px;" class="text-tour mb-1">Giới tính:
+                                                            <b>{{user?.gender}}</b>
+                                                        </p>
+                                                        <p style="font-size: 16px;" class="text-tour mb-1">Ngày sinh:
+                                                            <b>{{user?.dob}}</b>
+                                                        </p>
+                                                        <p style="font-size: 16px;" class="text-tour mb-1">Số điện thoại:
+                                                            <b>{{user?.phone}}</b>
+                                                        </p>
+                                                        <p style="font-size: 16px;" class="text-tour mb-1">Email:
+                                                            <b>{{user?.email}}</b>
+                                                        </p>
+                                                        <p style="font-size: 16px;" class="text-tour mb-1">Địa chỉ:
+                                                            <b>{{user?.address}}</b>
+                                                        </p>
+                                                        <p style="font-size: 16px;" class="text-tour mb-1">Khởi hành:
+                                                            <b>{{tour?.departureDate}}</b>
+                                                        </p>
+                                                        <p style="font-size: 16px;" class="text-tour mb-1">Thời gian:
+                                                            <b>{{tour?.duration}}</b>
+                                                        </p>
+                                                        <p style="font-size: 16px;" class="text-tour mb-1">Nơi đến:
+                                                            <b>{{tour?.address}}</b>
+                                                        </p>
+                                                        <p style="font-size: 16px;" class="text-tour mb-1">Giá tour: <b
+                                                                class="text-danger">{{total}}</b></p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <button type="button" class="btn btn-primary"
+                                                            style="min-width: 200px; min-height: 60px; align-items: center; justify-content: center;">
+                                                            <a routerLink="/home-page"
+                                                                style="color: white; text-decoration: none; font-size: 26px;"
+                                                                (click)="resetStep()"> Trang chủ</a>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="isSuccessfull == false">
+                                                <h3>Thanh toán thất bại</h3>
+                                                <div class="booking-process-btn d-flex mt-3 mb-3"
+                                                style="justify-content: space-around;">
+                                                    <button type="button" class="btn btn-secondary" (click)="prevStep()">Quay
+                                                        lại</button>
+                                                    <button type="button" class="btn btn-primary">
+                                                        <a routerLink="/home-page"
+                                                            style="color: white; text-decoration: none; font-size: 26px;"
+                                                            (click)="resetStep()"> Trang chủ</a>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- step 4 end -->
+                            </form>
+                        </div>
+                        <div class="col-md-4 price-panel" *ngIf="total === null || currentStep !== 4">
+                            <div style="margin-left: 20px; margin-top: 20px;">
+                                <h3>{{tour?.titleTour}}
+                                </h3>
+                                <ul class="list-unstyled total-price" style="margin-left: 20px;">
+                                    <li>
+                                        <i class="fa-solid fa-bicycle"></i>Ngày đi:
+                                        <span>{{tour?.departureDate}}</span>
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-backward"></i>Ngày về:
+                                        <span>{{tour?.returnDate}}</span>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>Thời gian:
+                                        <span>{{tour?.duration}}</span>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-user-secret" aria-hidden="true"></i>
+                                        Giá Người lớn :
+                                        <span><strong>{{tour?.price}}</strong> đ</span><span id="adult"> X 1</span>
+                                    </li>
+                                    <li *ngIf="tour?.childPrice && tour?.childPrice !== 0">
+                                        <i class="fa fa-child" aria-hidden="true"></i>Giá trẻ em :
+                                        <span><strong>{{tour?.childPrice}}</strong> đ</span><span id="child"></span>
+                                    </li>
+                                    <li *ngIf="tour?.babyPrice && tour?.babyPrice !== 0">
+                                        <i class="fa fa-user-times" aria-hidden="true"></i>Giá em bé :
+                                        <span><strong>{{tour?.babyPrice}}</strong> đ</span><span id="infant"></span>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-minus-square" aria-hidden="true"></i>Mã khuyến
+                                        mãi :
+                                        <span><strong id="promotionPrice"></strong>{{selectedPromotion?.code}} đ</span>
+                                    </li>
+                                    <li id="liPaymentFee" class="display-hidden">
+                                        <i class="fa fa-plus-square" aria-hidden="true"></i>Giảm :
+                                        <span><strong id="pricePaymentFee"></strong>{{ ((tour?.price || 0) * form.adult + (tour?.childPrice || 0) * form.children + (tour?.babyPrice || 0) * form.baby)*((selectedPromotion?.discountPercentage || 0)/100)}} đ</span>
+                                    </li>
+                                </ul>
+                                <div class="priceTotal">
+                                    <h2>Tổng:
+                                        <span id="total-price" style="color: orangered;">
+                                            {{ ((tour?.price || 0) * form.adult + (tour?.childPrice || 0) * form.children + (tour?.babyPrice || 0) * form.baby) - 
+                                                ((tour?.price || 0) * form.adult + (tour?.childPrice || 0) * form.children + (tour?.babyPrice || 0) * form.baby)*((selectedPromotion?.discountPercentage || 0)/100)
+                                            }}
+                                        </span>
+                                        <span style="font-size: 16px;
+                                        color: #000;
+                                        font-weight: 500;
+                                        line-height: 21px;
+                                        text-transform: lowercase;"> đ</span>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <app-footer></app-footer>
+</body>
+
+</html>

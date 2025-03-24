@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Upvex - Responsive Admin Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
+    <meta content="Coderthemes" name="author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+
+<body>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="mt-0">Báo cáo doanh thu</h5>
+            </div>
+            <div class="col-12">
+                <div class="input-group mb-3">
+                    <div class="col-3">
+                        <button class="btn btn-outline-secondary dropdown-toggle" style="max-height: 50px;"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Loại báo cáo
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><button class="dropdown-item" (click)="selectReportType('day')">Theo ngày</button></li>
+                            <li><button class="dropdown-item" (click)="selectReportType('month')">Theo tháng</button>
+                            </li>
+                            <li><button class="dropdown-item" (click)="selectReportType('year')">Theo năm</button></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li><button class="dropdown-item" (click)="selectReportType('all')">Xem tất cả</button></li>
+                        </ul>
+                    </div>
+                    <div class="col-7">
+                        <!-- Input ngày -->
+                        <div *ngIf="reportType === 'day'" style="margin-top: 20px;" class="row">
+                            <div class="m-1 col">
+                                <label>Từ ngày:</label>
+                                <input type="date" [(ngModel)]="startDate" />
+                            </div>
+                            <div class="m-1 col">
+                                <label>Đến ngày:</label>
+                                <input type="date" [(ngModel)]="endDate" />
+                            </div>
+                        </div>
+
+                        <!-- Input tháng -->
+                        <div *ngIf="reportType === 'month'" style="margin-top: 20px;">
+                            <label>Chọn tháng:</label>
+                            <input type="month" [(ngModel)]="startDate" />
+                        </div>
+
+                        <!-- Input năm -->
+                        <div *ngIf="reportType === 'year'" style="margin-top: 20px;">
+                            <label>Chọn năm:</label>
+                            <input type="number" [(ngModel)]="startDate" min="2000" max="2100" />
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-outline-secondary " style="max-height: 50px;" type="button"
+                            (click)="filterBookings()">
+                            Xem báo cáo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="sub-header"></p>
+        <div class="table-responsive">
+            <table class="table table-centered mb-0" id="inline-editable">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Ngày</th>
+                        <th>Tên tour</th>
+                        <th>Tên khách hàng</th>
+                        <th>Tổng hóa đơn</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let booking of filteredBookings">
+                        <td></td>
+                        <td>{{ booking.dateAdded | date: 'dd/MM/yyyy' }}</td>
+                        <td>{{ booking.tour.titleTour }}</td>
+                        <td>{{ booking.customerName }}</td>
+                        <td>{{ booking.total | currency: 'VND' }}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><b>Tổng</b></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>{{ calculateTotal() | currency: 'VND' }}</b></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> <!-- end .table-responsive-->
+    </div> <!-- end card-body -->
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Upvex - Responsive Admin Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
+    <meta content="Coderthemes" name="author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <div class="card-body">
+        <div class="d-flex" style="justify-content: space-between;">
+            <h5 class="mt-0">Quản lý bài đăng</h5>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+        
+        <p class="sub-header"></p>
+        <div class="table-responsive">
+            <table class="table table-centered mb-0" id="inline-editable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Votes</th>
+                        <th>Status</th>
+                        <th>Type</th>
+                        <th>Views</th>
+                        <th>Status Action</th>
+                        <th>Date Added</th>
+                        <th>Date Edited</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody *ngFor="let post of posts">
+                    <tr>
+                        <td>{{post.idPost}}</td>
+                        <td>{{post.titlePost}}</td>
+                        <td>{{post.vote}}</td>
+                        <td>{{post.status}}</td>
+                        <td>{{post.type}}</td>
+                        <td>{{post.view}}</td>
+                        <td>{{post.statusAction}}</td>
+                        <td>{{post.dateAdded | date:'dd/MM/yy'}}</td>
+                        <td>{{post.dateEdited | date:'dd/MM/yy'}}</td>
+                        <td><button type="button" data-bs-toggle="modal" data-bs-target="#editPostModal"
+                                style="border: none;" (click)="editPost(post.idPost)">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </button></td>
+                        <td><button data-bs-toggle="modal" data-bs-target="#deleteModal" style="border: none;"
+                                (click)="setPostId(post.idPost)">
+                                <i class="fa-solid fa-trash"></i>
+                            </button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> <!-- end .table-responsive-->
+    </div> <!-- end card-body -->
+
+
+    <!-- Modal edit-->
+    <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editPostModalLabel">Chỉnh Sửa Bài Viết</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="titlePost" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="titlePost" [(ngModel)]="form.titlePost"
+                                name="titlePost">
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="statusAction" class="form-label">Status Action</label>
+                                <select class="form-control" id="statusAction" [(ngModel)]="form.statusAction"
+                                    name="statusAction">
+                                    <option value="ACTIVE">ACTIVE</option>
+                                    <option value="DELETE">DELETE</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" class="form-control" id="description" [(ngModel)]="form.description"
+                                name="description">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contentPost" class="form-label">Content</label>
+                            <quill-editor class="form-control" style="min-height: 300px;" id="contentPost"
+                                [(ngModel)]="form.contentPost" name="contentPost" [modules]="editorModules">
+                            </quill-editor>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="images" class="form-label">Image1</label>
+                            <input type="file" class="form-control" id="image" multiple [(ngModel)]="form.image"
+                                name="image" (change)="onFileSelected($event)">
+                        </div>
+                        <!-- Ảnh 1 -->
+                        <div *ngIf="form.image">
+                            <label>Image : </label>
+                            <img [src]="form.image" alt="Image" style="width: 100px; height: auto;">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary" (click)="saveChanges()">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal delete -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary" (click)="deletePost()">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal create -->
+    <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createPostModalLabel">Tạo Bài Viết</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="titlePost" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="titlePost" [(ngModel)]="form.titlePost"
+                                name="titlePost">
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col" style="display: none;">
+                               
+                                <input type="text" class="form-control" id="statusAction" 
+                                [(ngModel)]="form.statusAction" name="statusAction" value="ACTIVE">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" class="form-control" id="description" [(ngModel)]="form.description"
+                                name="description">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contentPost" class="form-label">Content</label>
+                            <quill-editor class="form-control" style="min-height: 300px;" id="contentPost"
+                                [(ngModel)]="form.contentPost" name="contentPost" [modules]="editorModules">
+                            </quill-editor>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="images" class="form-label">Image1</label>
+                            <input type="file" class="form-control" id="image" multiple [(ngModel)]="form.image"
+                                name="image" (change)="onFileSelected($event)">
+                        </div>
+                        <!-- Ảnh 1 -->
+                        <div *ngIf="form.image">
+                            <label>Image : </label>
+                            <img [src]="form.image" alt="Image" style="width: 100px; height: auto;">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary" (click)="createPost()">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

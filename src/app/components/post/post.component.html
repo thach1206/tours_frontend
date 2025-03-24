@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <app-header></app-header>
+    <div class="back-white">
+        <div class="container mt-5">
+            <div class="row g-5">
+                <div class="col">
+                    <div>
+                        <h3 class="pb-4 mb-4 fst-italic border-bottom">
+                            Bài đăng nổi bật
+                        </h3>
+                    </div>
+
+                    <!-- Nội dung bài đăng nổi bật -->
+                    <div *ngFor="let post of posts">
+                        <div *ngIf="post.statusAction === 'ACTIVE'">
+                            <article class="blog-post mb-4 mt-5">
+                                <h2 class="blog-post-title">{{post.titlePost}}</h2>
+                                <p class="blog-post-meta">{{post.dateEdited | date:'dd/MM/yy'}}</p>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 left">
+                                        <div class="image">
+                                            <img [src]="post.image" class="img-fluid" alt="image">
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>{{post.description}}</p>
+                                <p [innerHTML]="formatContent(post.contentPost)" class="formatted-content">
+                                
+                                </p>
+                                <hr>
+                            </article>
+                        </div>
+                    </div>
+
+                    <!-- Phần "Tuyến điểm" -->
+                    <!-- <div class="destinations-section mt-5">
+                        <h3 class="section-title">Tuyến điểm: Việt Nam</h3>
+                        <div class="destinations-container">
+                            <div class="destination-item">
+                                <img src="assets/image/tour-4-dao-va-lan-bien-9.jpg" alt="Điểm đến 1"
+                                    class="destination-img">
+                                <div class="destination-content">
+                                    <h4 class="destination-title">Ruộng bậc thang Sa Pa</h4>
+                                    <p class="destination-desc">Khám phá vẻ đẹp hùng vĩ của ruộng bậc thang, nét đặc
+                                        trưng văn hóa Tây Bắc Việt Nam.</p>
+                                </div>
+                            </div>
+                            <div class="destination-item">
+                                <img src="assets/image/tour-4-dao-va-lan-bien-9.jpg" alt="Điểm đến 2"
+                                    class="destination-img">
+                                <div class="destination-content">
+                                    <h4 class="destination-title">Phố cổ Hội An</h4>
+                                    <p class="destination-desc">Trải nghiệm không gian cổ kính và lãng mạn tại Hội An,
+                                        một Di sản Văn hóa Thế giới.</p>
+                                </div>
+                            </div>
+                            <div class="destination-item">
+                                <img src="assets/image/tour-4-dao-va-lan-bien-9.jpg" alt="Điểm đến 3"
+                                    class="destination-img">
+                                <div class="destination-content">
+                                    <h4 class="destination-title">Cố đô Huế</h4>
+                                    <p class="destination-desc">Thăm Cố đô Huế, vùng đất của những công trình kiến trúc
+                                        cổ và văn hóa độc đáo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+
+                <!-- Phần "Tin mới" -->
+                <!-- <div class="col-md-4">
+                    <div class="position-sticky" style="top: 2rem;">
+                        <div class="news-container">
+                            <h4 class="news-title">Tin mới</h4>
+                            <ul class="news-list">
+                                <li class="news-item">
+                                    <img src="https://via.placeholder.com/60" alt="Hình ảnh bài viết">
+                                    <div class="news-content">
+                                        <a href="#">Hành trình điểm cực đẹp miền Trung</a>
+                                        <div class="news-date">17/11/2024</div>
+                                    </div>
+                                </li>
+                                <li class="news-item">
+                                    <img src="https://via.placeholder.com/60" alt="Hình ảnh bài viết">
+                                    <div class="news-content">
+                                        <a href="#">Khám phá đặc sắc miền Tây</a>
+                                        <div class="news-date">15/11/2024</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

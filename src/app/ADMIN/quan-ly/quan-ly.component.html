@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Upvex - Responsive Admin Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
+    <meta content="Coderthemes" name="author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    App css
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        <!-- Topbar Start -->
+        <div class="navbar-custom">
+            <ul class="list-unstyled topnav-menu float-right mb-0">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" 
+                    href="/home-page" role="button" >
+                    Trang chủ
+                </a>
+            </ul>
+        </div>
+        <!-- end Topbar -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <app-nav-quan-ly (activeMenuChange)="onActiveMenuChange($event)"></app-nav-quan-ly>
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <ng-container [ngSwitch]="ACTIVE">
+                                    <app-quan-ly-post *ngSwitchCase="'POST'"></app-quan-ly-post>
+                                    <app-quan-ly-tour *ngSwitchCase="'TOUR'"></app-quan-ly-tour>
+                                    <app-quan-ly-khuyen-mai *ngSwitchCase="'VOUCHER'"></app-quan-ly-khuyen-mai>
+                                    <app-quan-ly-doanh-thu *ngSwitchCase="'MONEY'"></app-quan-ly-doanh-thu>
+                                    <!-- Thêm các component khác với điều kiện tương ứng nếu cần -->
+                                    <p *ngSwitchDefault>Không có component phù hợp để hiển thị.</p>
+                                </ng-container>
+                            </div> <!-- end card -->
+                        </div> <!-- end col -->
+                    </div> <!-- end row -->
+                </div> <!-- container -->
+            </div> <!-- content -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+    </div>
+</body>
+
+</html>
